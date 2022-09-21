@@ -33,3 +33,9 @@ fi
 # Go config
 export PATH=/usr/local/go/bin:$PATH
 export PATH=$(go env GOPATH)/bin:$PATH
+
+# Pyenv config
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
