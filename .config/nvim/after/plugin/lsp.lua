@@ -1,3 +1,4 @@
+-- https://github.com/neovim/nvim-lspconfig
 require 'lspconfig'.gopls.setup {
   cmd = {"gopls", "serve"},
   settings = {
@@ -9,3 +10,5 @@ require 'lspconfig'.gopls.setup {
     },
   }
 }
+
+require 'lspconfig'.pyright.setup{}
