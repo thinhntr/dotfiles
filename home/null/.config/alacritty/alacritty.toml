@@ -1,0 +1,14 @@
+import = [
+  "~/.config/alacritty/tokyonight_moon.toml"
+]
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font" }
+italic = { style = "Normal" }
+size = 15.5
+
+[selection]
+save_to_clipboard = true
+
+[window]
+option_as_alt = "Both"
