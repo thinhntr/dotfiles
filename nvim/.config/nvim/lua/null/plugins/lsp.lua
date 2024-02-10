@@ -82,6 +82,7 @@ return {
 
   {
     "williamboman/mason.nvim",
+    cmd = "Mason",
     config = function(_, opts)
       require("mason").setup(opts)
     end,

@@ -39,5 +39,5 @@ return {
   { "nvim-lua/plenary.nvim", lazy = true },
 
   -- comment
-  { "numToStr/Comment.nvim", opts = {}, event = "VeryLazy" },
+  { "numToStr/Comment.nvim", opts = {}, keys = "gc" },
 }
