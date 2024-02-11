@@ -3,3 +3,4 @@
 stow --target="$HOME" nvim -R
 stow --target="$HOME" bin -R
 stow --target="$HOME" alacritty -R
+stow --target="$HOME" zsh -R

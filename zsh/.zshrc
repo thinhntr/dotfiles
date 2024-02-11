@@ -72,6 +72,7 @@ ZSH_THEME="fishy-custom"
 # Add wisely, as too many plugins slow down shell startup.
 # source ~/.zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 # plugins=(git zsh-syntax-highlighting)
+
 plugins=(
     git
     zsh-syntax-highlighting
@@ -116,5 +117,3 @@ export NVM_DIR="$HOME/.nvm"
 
 alias note='v ~/note'
 alias speaking='v ~/Desktop/Speaking_Practice'
-
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
