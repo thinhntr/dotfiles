@@ -9,6 +9,7 @@ return {
         require("conform").format({ lsp_fallback = true })
       end,
       mode = { "n", "v" },
+      desc = "conform Format",
     },
   },
   opts = {

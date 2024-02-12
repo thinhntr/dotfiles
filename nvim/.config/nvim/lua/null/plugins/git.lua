@@ -1,15 +1,22 @@
 return {
   {
     "tpope/vim-fugitive",
-    dependencies = "lewis6991/gitsigns.nvim",
-    keys = {
-      { "<leader>gs", vim.cmd.Git, mode = { "n" } },
-    },
+    event = "VeryLazy",
+    keys = { { "<leader>gg", vim.cmd.Git, mode = { "n" }, desc = "vim-fugitive" } },
   },
 
   {
     "lewis6991/gitsigns.nvim",
-    lazy = true,
+    event = "VeryLazy",
+    keys = {
+      { "<leader>gp", ":Gitsigns preview_hunk<CR>", mode = { "n" }, desc = "Gitsigns preview_hunk" },
+      {
+        "<leader>gb",
+        "<Cmd>Gitsigns toggle_current_line_blame<CR>",
+        mode = { "n" },
+        desc = "Gitsigns toggle_current_line_blame",
+      },
+    },
     opts = function()
       local git_icons = require("null.misc").icons.git
       return {
