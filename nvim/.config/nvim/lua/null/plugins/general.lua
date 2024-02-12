@@ -40,4 +40,12 @@ return {
 
   -- comment
   { "numToStr/Comment.nvim", opts = {}, keys = "gc" },
+
+  -- file explorer
+  {
+    "stevearc/oil.nvim",
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 }
