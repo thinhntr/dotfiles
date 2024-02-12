@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-candy=($(find ~/projects -mindepth 1 -maxdepth 1 -type d))
+if [ -f ~/bin/tses_LOAD_ME ]; then
+    candy+=($(tses_LOAD_ME))
+else
+    candy=($(find ~ -mindepth 1 -maxdepth 1 -type d))
+fi
 
 if [[ $# -eq 1 ]]; then
     selected=$1
