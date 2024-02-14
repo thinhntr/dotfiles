@@ -12,3 +12,5 @@ save_to_clipboard = true
 
 [window]
 option_as_alt = "Both"
+padding = { x = 4, y = 4 }
+decorations = "Buttonless"
