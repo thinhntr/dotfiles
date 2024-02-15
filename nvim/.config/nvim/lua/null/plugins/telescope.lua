@@ -20,9 +20,17 @@ return {
     {
       "<leader>fa",
       function()
-        vim.cmd.Telescope("find_files follow=true no_ignore=true hidden=true")
+        vim.cmd.Telescope("find_files", "follow=true", "no_ignore=true", "hidden=true")
       end,
       mode = { "n" },
+    },
+    {
+      "<leader>fg",
+      function()
+        vim.cmd.Telescope("git_files")
+      end,
+      mode = { "n" },
+      desc = "Fuzzy search through the output of git ls-files command, respects .gitignore"
     },
     {
       "<leader>fw",
