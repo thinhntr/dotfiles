@@ -9,6 +9,11 @@ return {
       enabled = vim.fn.executable("make") == 1,
     },
   },
+  opts = function()
+    local grep_args = require("telescope.config").values.vimgrep_arguments
+    vim.list_extend(grep_args, { "--hidden", "-g=!.git" })
+    return grep_args
+  end,
   keys = {
     {
       "<leader>ff",
