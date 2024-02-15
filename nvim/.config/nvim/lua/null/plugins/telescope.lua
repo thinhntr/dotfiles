@@ -35,7 +35,7 @@ return {
         vim.cmd.Telescope("git_files")
       end,
       mode = { "n" },
-      desc = "Fuzzy search through the output of git ls-files command, respects .gitignore"
+      desc = "Fuzzy search through the output of git ls-files command, respects .gitignore",
     },
     {
       "<leader>fw",
