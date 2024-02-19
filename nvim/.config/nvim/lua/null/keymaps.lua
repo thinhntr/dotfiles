@@ -1,6 +1,8 @@
 vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>")
 
+vim.keymap.set("n", "<leader>fp", '<cmd>silent !tmux neww tses<cr>')
+
 vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
 vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
 vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
