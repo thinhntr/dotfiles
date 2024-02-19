@@ -101,6 +101,9 @@ export VISUAL=$EDITOR
 alias v="nvim"
 alias diff='diff --color=always -u'
 
+alias cd='z'
+alias ci='zi'
+
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
