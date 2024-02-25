@@ -20,7 +20,7 @@ plugins=(
     zsh-syntax-highlighting
 )
 
-[ -f ~/.more_plugins ] && plugins+=($(grep -v '^#' .more_plugins))
+[ -f ~/.more_plugins ] && plugins+=($(grep -v '^#' ~/.more_plugins))
 source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.sc.zsh ] && source ~/.sc.zsh
