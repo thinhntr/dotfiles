@@ -21,9 +21,9 @@ return {
         },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "path" },
-        }, {
           { name = "buffer" },
+        }, {
+          { name = "path" },
           { name = "nvim_lsp_signature_help" },
         }),
         mapping = cmp.mapping.preset.insert({
@@ -72,8 +72,8 @@ return {
               require("luasnip").lsp_expand(args.body)
             end,
           }
-          table.insert(opts.sources, { name = "luasnip" })
           table.insert(opts.sources, { name = "nvim_lua" })
+          table.insert(opts.sources, { name = "luasnip" })
         end,
       },
     },
