@@ -51,6 +51,7 @@ return {
         },
         terraformls = {},
         pyright = {},
+        gopls = {},
       },
     },
     config = function(_, opts)

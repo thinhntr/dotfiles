@@ -16,7 +16,7 @@ return {
           enable = true,
         },
 
-        ensure_installed = { "lua", "vimdoc", "bash", "python", "hcl", "terraform", "yaml" },
+        ensure_installed = { "lua", "vimdoc", "bash", "python", "hcl", "terraform", "yaml", "java", "groovy", "go"},
       })
     end,
   },
