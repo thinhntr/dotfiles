@@ -21,6 +21,7 @@ return {
         vim.cmd.Telescope("find_files")
       end,
       mode = { "n" },
+      desc = "Find files",
     },
     {
       "<leader>fa",
@@ -28,6 +29,7 @@ return {
         vim.cmd.Telescope("find_files", "follow=true", "no_ignore=true", "hidden=true")
       end,
       mode = { "n" },
+      desc = "Find files including hidden",
     },
     {
       "<leader>fg",
@@ -43,6 +45,7 @@ return {
         vim.cmd.Telescope("live_grep")
       end,
       mode = { "n" },
+      desc = "Live grep",
     },
     {
       "<leader>fb",
@@ -50,6 +53,7 @@ return {
         vim.cmd.Telescope("buffers")
       end,
       mode = { "n" },
+      desc = "Find buffers",
     },
     {
       "<leader>fh",
@@ -57,6 +61,7 @@ return {
         vim.cmd.Telescope("help_tags")
       end,
       mode = { "n" },
+      desc = "Help tags",
     },
     {
       "<leader>fz",
@@ -64,6 +69,7 @@ return {
         vim.cmd.Telescope("current_buffer_fuzzy_find")
       end,
       mode = { "n" },
+      desc = "Current buffer fuzzy find"
     },
   },
 }
