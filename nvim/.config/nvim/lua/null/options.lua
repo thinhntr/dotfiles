@@ -27,3 +27,5 @@ opt.hlsearch = false
 opt.scrolloff = 8
 opt.breakindent = true
 opt.fixendofline = false
+
+opt.guicursor=''
