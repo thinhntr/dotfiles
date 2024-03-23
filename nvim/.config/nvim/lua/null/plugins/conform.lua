@@ -20,6 +20,10 @@ return {
     },
     formatters_by_ft = {
       lua = { "stylua" },
+      python = { "black" },
+      javascript = { {"prettierd", "prettier" }},
+      yaml = { {"prettierd", "prettier" }},
+      json = { {"prettierd", "prettier" }},
     },
   },
 }

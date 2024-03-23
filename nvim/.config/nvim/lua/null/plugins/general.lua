@@ -38,6 +38,8 @@ return {
 
   { "nvim-lua/plenary.nvim", lazy = true },
 
+  { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+
   -- comment
   { "numToStr/Comment.nvim", opts = {}, event = "VeryLazy" },
 
