@@ -35,6 +35,9 @@ return {
       local luasnip = require("luasnip")
       luasnip.config.setup({})
 
+      -- Add parentheses after selecting function or method item
+      cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+
       require("cmp").setup({
         snippet = {
           expand = function(args)
