@@ -22,10 +22,30 @@ opt.shiftwidth = 0
 opt.softtabstop = 0
 opt.expandtab = true
 
-opt.hlsearch = false
+opt.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohls<CR>')
 
 opt.scrolloff = 8
 opt.breakindent = true
 opt.fixendofline = false
 
 opt.guicursor=''
+
+opt.ignorecase = true
+opt.smartcase = true
+
+opt.list = true
+opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+opt.cursorline = true
+
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
