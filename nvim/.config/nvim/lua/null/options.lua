@@ -38,6 +38,7 @@ opt.list = true
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 opt.cursorline = true
+opt.laststatus = 3
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
