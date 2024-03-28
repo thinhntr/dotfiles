@@ -29,16 +29,23 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lua",
+
+      -- pictograms to neovim built-in lsp
+      "onsails/lspkind.nvim",
     },
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      local lspkind = require("lspkind")
       luasnip.config.setup({})
 
       -- Add parentheses after selecting function or method item
       cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 
       require("cmp").setup({
+        view = {
+          entries = { name = "custom", selection_order = "near_cursor" },
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -72,41 +79,21 @@ return {
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
+          { name = "codeium" },
         }, {
           { name = "nvim_lsp_signature_help" },
         }),
+        experimental = { ghost_text = true },
         formatting = {
-          format = function(_, vim_item)
-            local cmp_kinds = {
-              Text = "  ",
-              Method = "  ",
-              Function = "  ",
-              Constructor = "  ",
-              Field = "  ",
-              Variable = "  ",
-              Class = "  ",
-              Interface = "  ",
-              Module = "  ",
-              Property = "  ",
-              Unit = "  ",
-              Value = "  ",
-              Enum = "  ",
-              Keyword = "  ",
-              Snippet = "  ",
-              Color = "  ",
-              File = "  ",
-              Reference = "  ",
-              Folder = "  ",
-              EnumMember = "  ",
-              Constant = "  ",
-              Struct = "  ",
-              Event = "  ",
-              Operator = "  ",
-              TypeParameter = "  ",
-            }
-            vim_item.kind = (cmp_kinds[vim_item.kind] or "") .. vim_item.kind
-            return vim_item
-          end,
+          format = lspkind.cmp_format({
+            mode = "symbol_text",
+            preset = "codicons",
+            maxwidth = 50,
+            ellipsis_char = "...",
+            symbol_map = {
+              Codeium = "",
+            },
+          }),
         },
       })
     end,
