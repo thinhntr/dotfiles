@@ -34,6 +34,8 @@ opt.guicursor=''
 opt.list = true
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+opt.grepprg = "rg -n"
+
 opt.cursorline = true
 opt.laststatus = 3
 
