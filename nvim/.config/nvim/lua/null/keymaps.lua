@@ -23,5 +23,8 @@ vim.keymap.set("n", "N", "Nzz")
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 -- location list
-vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<M-j>", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<M-k>", "<cmd>lprev<CR>zz")
+
+vim.keymap.set("n", "<C-h>", "<C-w><C-w>", { desc = "Cycle through windows" })
+vim.keymap.set("n", "<C-q>", "<C-w><C-q>", { desc = "Close window" })
