@@ -31,9 +31,6 @@ opt.fixendofline = false
 
 opt.guicursor=''
 
-opt.ignorecase = true
-opt.smartcase = true
-
 opt.list = true
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
