@@ -39,7 +39,7 @@ return {
     local lga = require("telescope").extensions.live_grep_args
 
     return {
-      { "<leader>ff", builtin.find_files, mode = { "n" }, desc = "Find files" },
+      { "<leader><leader>", builtin.find_files, mode = { "n" }, desc = "Find files" },
       {
         "<leader>fa",
         function()

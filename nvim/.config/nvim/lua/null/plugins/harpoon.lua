@@ -8,7 +8,7 @@ return {
       local harpoon = require("harpoon")
       return {
         {
-          "<leader><leader>",
+          "<leader>h",
           function()
             harpoon.ui:toggle_quick_menu(harpoon:list())
           end,
