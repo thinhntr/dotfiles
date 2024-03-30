@@ -54,6 +54,7 @@ return {
       { "<leader>fb", builtin.buffers, mode = { "n" }, desc = "Find buffers" },
       { "<leader>fh", builtin.help_tags, mode = { "n" }, desc = "Help tags" },
       { "<leader>fz", builtin.current_buffer_fuzzy_find, mode = { "n" }, desc = "Current buffer fuzzy find" },
+      { "<leader>fr", builtin.resume, mode = { "n" }, desc = "Current buffer fuzzy find" },
     }
   end,
   -- enterprise
