@@ -7,7 +7,7 @@ return {
     opts = {
       options = {
         icons_enabled = true,
-        theme = "tokyonight",
+        theme = "rose-pine",
         component_separators = "",
         section_separators = "",
       },
@@ -39,10 +39,21 @@ return {
 
   {
     "folke/tokyonight.nvim",
+    cond = false,
     priority = 412049,
     config = function()
       require("tokyonight").setup({ style = "moon" })
       vim.cmd.colorscheme("tokyonight")
+    end,
+  },
+
+  {
+    "rose-pine/neovim",
+    priority = 412049,
+    name = "rose-pine",
+    config = function()
+      require("rose-pine").setup({ variant = "moon" })
+      vim.cmd.colorscheme("rose-pine")
     end,
   },
 
