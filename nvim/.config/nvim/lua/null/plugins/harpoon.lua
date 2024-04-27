@@ -18,10 +18,10 @@ return {
         {
           "<leader>a",
           function()
-            harpoon:list():append()
+            harpoon:list():add()
           end,
           mode = { "n" },
-          desc = "Harpoon append",
+          desc = "Harpoon add",
         },
         {
           "<leader>1",
