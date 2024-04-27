@@ -1,6 +1,6 @@
 return {
   "stevearc/conform.nvim",
-  lazy = true,
+  lazy = false,
   cmd = "ConformInfo",
   keys = {
     {
@@ -13,6 +13,10 @@ return {
     },
   },
   opts = {
+    format_on_save = {
+      lsp_fallback = true,
+      timeout_ms = 500,
+    },
     format = {
       timeout_ms = 3000,
       async = false,
@@ -21,9 +25,9 @@ return {
     formatters_by_ft = {
       lua = { "stylua" },
       python = { "black" },
-      javascript = { {"prettierd", "prettier" }},
-      yaml = { {"prettierd", "prettier" }},
-      json = { {"prettierd", "prettier" }},
+      javascript = { { "prettierd", "prettier" } },
+      yaml = { { "prettierd", "prettier" } },
+      json = { { "prettierd", "prettier" } },
     },
   },
 }
