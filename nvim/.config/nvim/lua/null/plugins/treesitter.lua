@@ -17,17 +17,19 @@ return {
         },
 
         ensure_installed = {
-          "lua",
-          "vimdoc",
           "bash",
-          "python",
-          "hcl",
-          "terraform",
-          "yaml",
-          "java",
-          "groovy",
+          "c",
           "go",
+          "groovy",
+          "hcl",
+          "java",
           "javascript",
+          "json",
+          "lua",
+          "python",
+          "terraform",
+          "vimdoc",
+          "yaml",
         },
       })
     end,
@@ -39,7 +41,7 @@ return {
     opts = {
       trim_scope = "inner",
       mode = "topline",
-      max_lines = 0,
+      max_lines = 8,
     },
   },
 }

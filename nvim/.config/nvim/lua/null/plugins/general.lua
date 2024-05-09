@@ -1,5 +1,6 @@
 return {
   { "tpope/vim-sleuth" },
+  { "grafana/vim-alloy" },
 
   {
     "nvim-lualine/lualine.nvim",
@@ -52,7 +53,13 @@ return {
     priority = 412049,
     name = "rose-pine",
     config = function()
-      require("rose-pine").setup({ variant = "moon" })
+      require("rose-pine").setup({
+        variant = "moon",
+        style = {
+          bold = false,
+          italic = false,
+        },
+      })
       vim.cmd.colorscheme("rose-pine")
     end,
   },
