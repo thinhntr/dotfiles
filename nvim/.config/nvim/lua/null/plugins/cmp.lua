@@ -40,9 +40,6 @@ return {
       luasnip.config.setup({})
 
       require("cmp").setup({
-        view = {
-          entries = { name = "custom", selection_order = "near_cursor" },
-        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -79,7 +76,6 @@ return {
           { name = "buffer" },
           { name = "path" },
         }),
-        experimental = { ghost_text = true },
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol_text",
