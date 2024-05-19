@@ -55,9 +55,10 @@ return {
     config = function()
       require("rose-pine").setup({
         variant = "moon",
-        style = {
+        styles = {
           bold = false,
           italic = false,
+          transparency = false,
         },
       })
       vim.cmd.colorscheme("rose-pine")
