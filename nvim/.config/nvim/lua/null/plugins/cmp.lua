@@ -39,9 +39,6 @@ return {
       local lspkind = require("lspkind")
       luasnip.config.setup({})
 
-      -- Add parentheses after selecting function or method item
-      cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-
       require("cmp").setup({
         view = {
           entries = { name = "custom", selection_order = "near_cursor" },
