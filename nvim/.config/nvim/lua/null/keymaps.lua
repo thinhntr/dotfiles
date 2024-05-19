@@ -1,4 +1,6 @@
 vim.keymap.set("n", "Q", "<Nop>", { silent = true })
+vim.keymap.set("n", "q:", "<Nop>", { silent = true })
+vim.keymap.set("n", "q!", "q:", { silent = true })
 vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>")
 
