@@ -13,10 +13,10 @@ return {
     },
   },
   opts = {
-    format_on_save = {
-      lsp_fallback = true,
-      timeout_ms = 500,
-    },
+    -- format_on_save = {
+    --   lsp_fallback = true,
+    --   timeout_ms = 500,
+    -- },
     format = {
       timeout_ms = 3000,
       async = false,
@@ -26,6 +26,7 @@ return {
       lua = { "stylua" },
       python = { "black" },
       javascript = { { "prettierd", "prettier" } },
+      html = { { "prettierd", "prettier" } },
       yaml = { { "prettierd", "prettier" } },
       json = { { "prettierd", "prettier" } },
     },
