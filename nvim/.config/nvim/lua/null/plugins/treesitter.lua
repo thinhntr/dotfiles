@@ -1,3 +1,23 @@
+local ensure_installed = {
+  "bash",
+  "c",
+  "go",
+  "groovy",
+  "hcl",
+  "java",
+  "javascript",
+  "json",
+  "lua",
+  "python",
+  "scss",
+  "svelte",
+  "terraform",
+  "tsx",
+  "typescript",
+  "vimdoc",
+  "yaml",
+}
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -9,28 +29,14 @@ return {
       require("nvim-treesitter.configs").setup({
         highlight = {
           enable = true,
-          use_languagetree = true,
+          -- use_languagetree = true,
         },
 
         indent = {
           enable = true,
         },
 
-        ensure_installed = {
-          "bash",
-          "c",
-          "go",
-          "groovy",
-          "hcl",
-          "java",
-          "javascript",
-          "json",
-          "lua",
-          "python",
-          "terraform",
-          "vimdoc",
-          "yaml",
-        },
+        ensure_installed = ensure_installed,
       })
     end,
   },
