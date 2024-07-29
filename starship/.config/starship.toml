@@ -103,6 +103,12 @@ format = '[$symbol$context( \($namespace\))]($style) '
 symbol = '󱃾 '
 style = 'green'
 
+[gcloud]
+symbol = '󱇶 '
+style = 'blue'
+
+[terraform]
+symbol = ' '
 
 [time]
 disabled = false
