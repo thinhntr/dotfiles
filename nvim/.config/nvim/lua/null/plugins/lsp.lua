@@ -6,6 +6,7 @@ local servers = {
       diagnostics = { disable = { "missing-fields" } },
     },
   },
+  clangd = {},
   terraformls = {},
   pyright = {},
   gopls = {},

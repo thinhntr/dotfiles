@@ -1,6 +1,8 @@
 local ensure_installed = {
   "bash",
   "c",
+  "cpp",
+  "css",
   "go",
   "groovy",
   "hcl",
