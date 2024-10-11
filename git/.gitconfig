@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Replace Me
+	email = replaceme@email.com
+
+[alias]
+	ss = status
+	cc = commit
+	co = checkout
+	rb = rebase
+	br = branch
