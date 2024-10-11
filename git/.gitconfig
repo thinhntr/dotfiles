@@ -1,8 +1,8 @@
 # This is Git's per-user configuration file.
 [user]
 # Please adapt and uncomment the following lines:
-	name = Thinh Nguyen
-	email = thinhntr@gmail.com
+	name = Replace Me
+	email = replaceme@email.com
 
 [alias]
 	ss = status

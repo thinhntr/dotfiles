@@ -27,20 +27,12 @@ return {
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     event = "VeryLazy",
     dependencies = "nvim-treesitter/nvim-treesitter-context",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        highlight = {
-          enable = true,
-          -- use_languagetree = true,
-        },
-
-        indent = {
-          enable = true,
-        },
-
-        ensure_installed = ensure_installed,
-      })
-    end,
+    main = "nvim-treesitter.configs",
+    opts = {
+      highlight = { enable = true },
+      indent = { enable = true },
+      ensure_installed = ensure_installed,
+    },
   },
 
   {

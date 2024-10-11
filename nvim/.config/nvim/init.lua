@@ -1,1 +1,105 @@
-require("null")
+--[[
+===================
+|  options         |
+===================
+--]]
+
+vim.g.mapleader = " "
+
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 0 -- zero -> uses 'tabstop'
+vim.opt.softtabstop = 0 -- zero -> off, negative -> uses 'shiftwidth'
+vim.opt.expandtab = true
+
+vim.opt.scrolloff = 5
+
+--[[
+===================
+| keymaps         |
+===================
+--]]
+
+vim.keymap.set("n", "Q", "<Nop>", { silent = true })
+vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
+
+-- vim.diagnostic
+vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
+vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
+vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+
+vim.keymap.set("x", "<leader>p", '"_dP')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
+vim.keymap.set({ "n", "v" }, "<leader>Y", '"+Y')
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+
+-- quickfix list
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+-- location list
+vim.keymap.set("n", "<M-j>", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<M-k>", "<cmd>lprev<CR>zz")
+
+vim.keymap.set("n", "<C-h>", "<C-w><C-w>", { desc = "Cycle through windows" })
+vim.keymap.set("n", "<C-q>", "<C-w><C-q>", { desc = "Close window" })
+
+--[[
+===================
+| autocommands    |
+===================
+--]]
+
+--  See `:help lua-guide-autocommands`
+
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
+--[[
+===================
+| lazy.nvim       |
+===================
+--]]
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+  spec = {
+    -- import your plugins
+    { import = "plugins" },
+  },
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "rose-pine" } },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
+})
