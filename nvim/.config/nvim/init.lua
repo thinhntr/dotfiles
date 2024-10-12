@@ -17,6 +17,10 @@ vim.opt.expandtab = true
 
 vim.opt.scrolloff = 5
 vim.opt.fixeol = false
+vim.opt.guicursor = ""
+vim.opt.signcolumn = "yes"
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 vim.opt.laststatus = 3 -- all windows use the same status line
 vim.opt.showmode = false -- don't show the mode, since it's already in the status line
@@ -48,11 +52,11 @@ vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
 
 -- quickfix list
-vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<C-j>", "<CMD>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<CMD>cprev<CR>zz")
 -- location list
-vim.keymap.set("n", "<M-j>", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<M-k>", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<M-j>", "<CMD>lnext<CR>zz")
+vim.keymap.set("n", "<M-k>", "<CMD>lprev<CR>zz")
 
 --[[
 ===================

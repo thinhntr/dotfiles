@@ -4,6 +4,7 @@ return {
   { -- "rose-pine/neovim",
     "rose-pine/neovim",
     lazy = false,
+    priority = 412049,
     name = "rose-pine",
     config = function()
       require("rose-pine").setup({
@@ -78,7 +79,7 @@ return {
 
   { -- conform - autoformat
     "stevearc/conform.nvim",
-    lazy = false,
+    event = "CursorMoved",
     config = function()
       require("conform").setup({
         notify_on_error = false,
@@ -163,28 +164,29 @@ return {
         },
       },
     },
-  },
-
-  { -- "echasnovski/mini.indentscope",
-    "echasnovski/mini.indentscope",
-    version = "*",
-    event = "VeryLazy",
-    config = function()
-      local indentscope = require("mini.indentscope")
-      indentscope.setup({
-        symbol = "▏",
-        options = { try_as_border = true },
-        draw = {
-          delay = 0,
-          animation = indentscope.gen_animation.none(),
-        },
-      })
-    end,
+    dependencies = {
+      { -- "echasnovski/mini.indentscope",
+        "echasnovski/mini.indentscope",
+        version = "*",
+        config = function()
+          local indentscope = require("mini.indentscope")
+          indentscope.setup({
+            symbol = "▏",
+            options = { try_as_border = true },
+            draw = {
+              delay = 0,
+              animation = indentscope.gen_animation.none(),
+            },
+          })
+        end,
+      },
+    },
   },
 
   { -- "nvim-telescope/telescope.nvim"
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
+    lazy = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
       { -- "nvim-telescope/telescope-fzf-native.nvim",
@@ -197,33 +199,39 @@ return {
     },
     config = function()
       require("telescope").setup()
-
       pcall(require("telescope").load_extension, "fzf")
-
-      local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
-      vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
-      vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
-      vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
-      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
-      vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
-      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [b]uffers" })
+    end,
+  },
+  keys = function()
+    local builtin = require("telescope.builtin")
+    return {
+      { "<leader>fh", builtin.help_tags, desc = "[F]ind [H]elp" },
+      { "<leader>fk", builtin.keymaps, desc = "[F]ind [K]eymaps" },
+      { "<leader>ff", builtin.find_files, desc = "[F]ind [F]iles" },
+      { "<leader>fs", builtin.builtin, desc = "[F]ind [S]elect Telescope" },
+      { "<leader>fw", builtin.grep_string, desc = "[F]ind current [W]ord" },
+      { "<leader>fg", builtin.live_grep, desc = "[F]ind by [G]rep" },
+      { "<leader>fd", builtin.diagnostics, desc = "[F]ind [D]iagnostics" },
+      { "<leader>fr", builtin.resume, desc = "[F]ind [R]esume" },
+      { "<leader>fb", builtin.buffers, desc = "[F]ind existing [b]uffers" },
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set("n", "<leader>f/", function()
-        builtin.live_grep({
-          grep_open_files = true,
-          prompt_title = "Live Grep in Open Files",
-        })
-      end, { desc = "[F]ind [/] in Open Files" })
-
+      {
+        "<leader>f/",
+        function()
+          builtin.live_grep({ grep_open_files = true, prompt_title = "Live Grep in Open Files" })
+        end,
+        desc = "[F]ind [/] in Open Files",
+      },
       -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set("n", "<leader>fn", function()
-        builtin.find_files({ cwd = vim.fn.stdpath("config") })
-      end, { desc = "[F]ind [N]eovim files" })
-    end,
-  },
+      {
+        "<leader>fn",
+        function()
+          builtin.find_files({ cwd = vim.fn.stdpath("config") })
+        end,
+        desc = "[F]ind [N]eovim files",
+      },
+    }
+  end,
 }

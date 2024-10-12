@@ -26,22 +26,19 @@ return {
     build = ":TSUpdate",
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     event = "VeryLazy",
-    dependencies = "nvim-treesitter/nvim-treesitter-context",
     main = "nvim-treesitter.configs",
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
       ensure_installed = ensure_installed,
     },
-  },
-
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    lazy = true,
-    opts = {
-      trim_scope = "inner",
-      mode = "topline",
-      max_lines = 8,
+    dependencies = { -- "nvim-treesitter/nvim-treesitter-context",
+      "nvim-treesitter/nvim-treesitter-context",
+      opts = {
+        trim_scope = "inner",
+        mode = "topline",
+        max_lines = 8,
+      },
     },
   },
 }
