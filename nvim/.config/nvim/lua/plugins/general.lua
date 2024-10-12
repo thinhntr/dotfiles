@@ -22,7 +22,7 @@ return {
     "stevearc/oil.nvim",
     lazy = false,
     opts = { default_file_explorer = true },
-    keys = { { "n", "<leader>e", "<CMD>Oil<CR>" } },
+    keys = { { "<leader>e", "<CMD>Oil<CR>" } },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
@@ -78,57 +78,62 @@ return {
 
   { -- conform - autoformat
     "stevearc/conform.nvim",
-    event = { "BufWritePre" },
-    cmd = { "ConformInfo" },
-    keys = {
-      {
-        "<leader>cf",
-        function()
-          require("conform").format({ async = true, lsp_format = "fallback" })
+    lazy = false,
+    config = function()
+      require("conform").setup({
+        notify_on_error = false,
+        format_on_save = function(bufnr)
+          -- Disable "format_on_save lsp_fallback" for languages that don't
+          -- have a well standardized coding style. You can add additional
+          -- languages here or re-enable it for the disabled ones.
+          local disable_filetypes = { c = true, cpp = true }
+          local lsp_format_opt
+          if disable_filetypes[vim.bo[bufnr].filetype] then
+            lsp_format_opt = "never"
+          else
+            lsp_format_opt = "fallback"
+          end
+          return {
+            timeout_ms = 500,
+            lsp_format = lsp_format_opt,
+          }
         end,
-        mode = "",
-        desc = "[c]onform [f]ormat",
-      },
-    },
-    opts = {
-      notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        local lsp_format_opt
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          lsp_format_opt = "never"
-        else
-          lsp_format_opt = "fallback"
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = { "black" },
+          javascript = { { "prettierd", "prettier" } },
+          html = { { "prettierd", "prettier" } },
+          yaml = { { "prettierd", "prettier" } },
+          json = { { "prettierd", "prettier" } },
+        },
+      })
+
+      vim.api.nvim_create_user_command("Format", function(args)
+        local range = nil
+        if args.count ~= -1 then
+          local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+          range = {
+            start = { args.line1, 0 },
+            ["end"] = { args.line2, end_line:len() },
+          }
         end
-        return {
-          timeout_ms = 500,
-          lsp_format = lsp_format_opt,
-        }
-      end,
-      formatters_by_ft = {
-        lua = { "stylua" },
-        python = { "black" },
-        javascript = { { "prettierd", "prettier" } },
-        html = { { "prettierd", "prettier" } },
-        yaml = { { "prettierd", "prettier" } },
-        json = { { "prettierd", "prettier" } },
-      },
-    },
+        require("conform").format({ async = true, lsp_format = "fallback", range = range })
+      end, { range = true })
+
+      vim.keymap.set("", "<leader>cf", "<CMD>Format<CR>")
+    end,
   },
 
   { -- "tpope/vim-fugitive",
     "tpope/vim-fugitive",
-    keys = { { "<leader>gg", vim.cmd.Git, mode = { "n" }, desc = "vim-fugitive" } },
+    keys = { { "<leader>gg", vim.cmd.Git, desc = "vim-fugitive" } },
   },
 
   { -- "lewis6991/gitsigns.nvim",
     "lewis6991/gitsigns.nvim",
     event = "VeryLazy",
     opts = {},
-    keys = { { "<leader>gb", "<Cmd>Gitsigns toggle_current_line_blame<CR>", mode = { "n" } } },
+    keys = { { "<leader>gb", "<Cmd>Gitsigns toggle_current_line_blame<CR>" } },
   },
 
   { -- "lukas-reineke/indent-blankline.nvim" - indent guides for Neovim
@@ -179,67 +184,46 @@ return {
 
   { -- "nvim-telescope/telescope.nvim"
     "nvim-telescope/telescope.nvim",
-    event = "VimEnter",
     branch = "0.1.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { -- "nvim-telescope/telescope-fzf-native.nvim",
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        cond = function()
+          return vim.fn.executable("make") == 1
+        end,
+      },
+    },
+    config = function()
+      require("telescope").setup()
+
+      pcall(require("telescope").load_extension, "fzf")
+
+      local builtin = require("telescope.builtin")
+      vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
+      vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
+      vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
+      vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
+      vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
+      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+      vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [b]uffers" })
+
+      -- It's also possible to pass additional configuration options.
+      --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      vim.keymap.set("n", "<leader>f/", function()
+        builtin.live_grep({
+          grep_open_files = true,
+          prompt_title = "Live Grep in Open Files",
+        })
+      end, { desc = "[F]ind [/] in Open Files" })
+
+      -- Shortcut for searching your Neovim configuration files
+      vim.keymap.set("n", "<leader>fn", function()
+        builtin.find_files({ cwd = vim.fn.stdpath("config") })
+      end, { desc = "[F]ind [N]eovim files" })
+    end,
   },
-  -- { -- "nvim-telescope/telescope.nvim"
-  --   "nvim-telescope/telescope.nvim",
-  --   branch = "0.1.x",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope-live-grep-args.nvim",
-  --     {
-  --       "nvim-telescope/telescope-fzf-native.nvim",
-  --       build = "make",
-  --       enabled = vim.fn.executable("make") == 1,
-  --     },
-  --   },
-  --   config = function()
-  --     local lga_actions = require("telescope-live-grep-args.actions")
-  --
-  --     require("telescope").setup({
-  --       extensions = {
-  --         live_grep_args = {
-  --           auto_quoting = true, -- enable/disable auto-quoting
-  --           -- define mappings, e.g.
-  --           mappings = { -- extend mappings
-  --             i = {
-  --               ["<C-k>"] = lga_actions.quote_prompt(),
-  --               ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-  --             },
-  --           },
-  --           -- ... also accepts theme settings, for example:
-  --           -- theme = "dropdown", -- use dropdown theme
-  --           -- theme = { }, -- use own theme spec
-  --           -- layout_config = { mirror=true }, -- mirror preview pane
-  --         },
-  --       },
-  --     })
-  --     pcall(require("telescope").load_extension, "fzf")
-  --     pcall(require("telescope").load_extension, "live_grep_args")
-  --   end,
-  --   keys = function()
-  --     local builtin = require("telescope.builtin")
-  --     local lga = require("telescope").extensions.live_grep_args
-  --
-  --     return {
-  --       { "<leader>ff", builtin.find_files, mode = { "n" }, desc = "Find files" },
-  --       {
-  --         "<leader>fa",
-  --         function()
-  --           builtin.find_files({ follow = true, hidden = true, no_ignore = true })
-  --         end,
-  --         mode = { "n" },
-  --         desc = "Find files including hidden",
-  --       },
-  --       { "<leader>fl", lga.live_grep_args, mode = { "n" }, desc = "Find files through git ls-files" },
-  --       { "<leader>fg", builtin.git_files, mode = { "n" }, desc = "Find files through git ls-files" },
-  --       { "<leader>fw", builtin.live_grep, mode = { "n" }, desc = "Live grep" },
-  --       { "<leader>fb", builtin.buffers, mode = { "n" }, desc = "Find buffers" },
-  --       { "<leader>fh", builtin.help_tags, mode = { "n" }, desc = "Help tags" },
-  --       { "<leader>fz", builtin.current_buffer_fuzzy_find, mode = { "n" }, desc = "Current buffer fuzzy find" },
-  --       { "<leader>fr", builtin.resume, mode = { "n" }, desc = "Current buffer fuzzy find" },
-  --     }
-  --   end,
-  -- },
 }

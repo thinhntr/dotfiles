@@ -30,6 +30,8 @@ vim.opt.showmode = false -- don't show the mode, since it's already in the statu
 vim.keymap.set("n", "Q", "<Nop>", { silent = true })
 vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
 
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
 vim.keymap.set("n", "<C-h>", "<C-w><C-w>", { desc = "Cycle through windows" })
 vim.keymap.set("n", "<C-q>", "<C-w><C-q>", { desc = "Close window" })
 
