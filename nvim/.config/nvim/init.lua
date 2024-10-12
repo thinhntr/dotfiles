@@ -5,6 +5,7 @@
 --]]
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -15,6 +16,10 @@ vim.opt.softtabstop = 0 -- zero -> off, negative -> uses 'shiftwidth'
 vim.opt.expandtab = true
 
 vim.opt.scrolloff = 5
+vim.opt.fixeol = false
+
+vim.opt.laststatus = 3 -- all windows use the same status line
+vim.opt.showmode = false -- don't show the mode, since it's already in the status line
 
 --[[
 ===================
@@ -25,10 +30,9 @@ vim.opt.scrolloff = 5
 vim.keymap.set("n", "Q", "<Nop>", { silent = true })
 vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
 
--- vim.diagnostic
-vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+vim.keymap.set("n", "<C-h>", "<C-w><C-w>", { desc = "Cycle through windows" })
+vim.keymap.set("n", "<C-q>", "<C-w><C-q>", { desc = "Close window" })
+
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 vim.keymap.set("x", "<leader>p", '"_dP')
@@ -47,9 +51,6 @@ vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 -- location list
 vim.keymap.set("n", "<M-j>", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<M-k>", "<cmd>lprev<CR>zz")
-
-vim.keymap.set("n", "<C-h>", "<C-w><C-w>", { desc = "Cycle through windows" })
-vim.keymap.set("n", "<C-q>", "<C-w><C-q>", { desc = "Close window" })
 
 --[[
 ===================
