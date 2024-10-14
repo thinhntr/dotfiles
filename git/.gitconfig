@@ -9,4 +9,4 @@
 	cc = commit
 	co = checkout
 	rb = rebase
-
+	br = branch
