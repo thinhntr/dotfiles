@@ -141,7 +141,6 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = "VeryLazy",
-    dependencies = { "mini.indentscope" },
     opts = {
       indent = {
         char = "▏",
@@ -198,7 +197,7 @@ return {
       },
     },
     config = function()
-      require("telescope").setup()
+      require("telescope").setup({})
       pcall(require("telescope").load_extension, "fzf")
 
       local builtin = require("telescope.builtin")
