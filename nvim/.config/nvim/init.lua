@@ -19,6 +19,9 @@ vim.opt.scrolloff = 5
 vim.opt.fixeol = false
 vim.opt.guicursor = ""
 vim.opt.signcolumn = "yes"
+vim.opt.colorcolumn = "80"
+vim.opt.wrap = false
+
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
@@ -57,6 +60,16 @@ vim.keymap.set("n", "<C-k>", "<CMD>cprev<CR>zz")
 -- location list
 vim.keymap.set("n", "<M-j>", "<CMD>lnext<CR>zz")
 vim.keymap.set("n", "<M-k>", "<CMD>lprev<CR>zz")
+
+-- execute stuff
+vim.keymap.set("n", "<leader>xc", "<CMD>w<CR><CMD>!chmod +x %:p<CR>", { desc = "chmod +x current file" })
+vim.keymap.set("n", "<leader>xx", "<CMD>w<CR><CMD>!%:p<CR>", { desc = "execute current file" })
+vim.keymap.set(
+  "v",
+  "<leader>xl",
+  "y:let @9=substitute(@0, '\\\\*\\n', ' ', 'g')<CR>:!<C-r>9",
+  { desc = "execute highlighted text" }
+)
 
 --[[
 ===================

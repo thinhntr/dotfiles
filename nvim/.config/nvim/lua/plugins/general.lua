@@ -1,21 +1,36 @@
+local ts_ensure_installed = {
+  "bash",
+  "c",
+  "cpp",
+  "css",
+  "go",
+  "groovy",
+  "hcl",
+  "javascript",
+  "json",
+  "lua",
+  "python",
+  "terraform",
+  "typescript",
+  "vimdoc",
+  "yaml",
+}
+
 return {
   "tpope/vim-sleuth",
 
-  { -- "rose-pine/neovim",
-    "rose-pine/neovim",
+  { -- "catppuccin/nvim",
+    "catppuccin/nvim",
     lazy = false,
     priority = 412049,
-    name = "rose-pine",
+    name = "catppuccin",
     config = function()
-      require("rose-pine").setup({
-        variant = "moon",
-        styles = {
-          bold = false,
-          italic = false,
-          transparency = false,
-        },
+      require("catppuccin").setup({
+        flavour = "frappe",
+        no_italic = true,
+        no_bold = true,
       })
-      vim.cmd.colorscheme("rose-pine")
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
 
@@ -33,7 +48,7 @@ return {
     opts = {
       options = {
         icons_enabled = false,
-        theme = "rose-pine",
+        theme = "catppuccin",
         component_separators = "",
         section_separators = "",
       },
@@ -216,10 +231,32 @@ return {
       vim.keymap.set("n", "<leader>f/", function()
         builtin.live_grep({ grep_open_files = true, prompt_title = "Live Grep in Open Files" })
       end, { desc = "[F]ind [/] in Open Files" })
+
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set("n", "<leader>fn", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
       end, { desc = "[F]ind [N]eovim files" })
     end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+    event = "VeryLazy",
+    main = "nvim-treesitter.configs",
+    opts = {
+      highlight = { enable = true },
+      indent = { enable = true },
+      ensure_installed = ts_ensure_installed,
+    },
+    dependencies = { -- "nvim-treesitter/nvim-treesitter-context",
+      "nvim-treesitter/nvim-treesitter-context",
+      opts = {
+        trim_scope = "inner",
+        mode = "topline",
+        max_lines = 8,
+      },
+    },
   },
 }
