@@ -26,7 +26,7 @@ return {
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({
-        flavour = "frappe",
+        flavour = "macchiato",
         no_italic = true,
         no_bold = true,
       })

@@ -114,5 +114,5 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = { { import = "plugins" } },
-  install = { colorscheme = { "rose-pine" } },
+  install = { colorscheme = { "catppuccin" } },
 })
