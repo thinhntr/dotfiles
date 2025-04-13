@@ -1,0 +1,18 @@
+{
+    "config": {
+        "mscp": {
+            "03769": {
+                "us-west-1": {
+                    "isolation": {
+                        "replicas": 60
+                    }
+                },
+                "us-west-2": {
+                    "isolation": {
+                        "replicas": 30
+                    }
+                }
+            }
+        }
+    }
+}
