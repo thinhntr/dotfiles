@@ -31,7 +31,10 @@ return {
   { -- "stevearc/oil.nvim",
     "stevearc/oil.nvim",
     lazy = false,
-    opts = { default_file_explorer = true },
+    opts = {
+      default_file_explorer = true,
+      view_options = { show_hidden = true },
+    },
     keys = { { "<leader>e", "<CMD>Oil<CR>" } },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
